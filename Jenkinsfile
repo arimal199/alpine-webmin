@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git([url: 'http://localhost:3000/arimal199/alpine-webmin.git', branch: 'main', credentialsId: 'local'])
+        git([url: 'https://github.com/arimal199/alpine-webmin.git', branch: 'main', credentialsId: 'local'])
 
       }
     }
