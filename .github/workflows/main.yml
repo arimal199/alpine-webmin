@@ -76,15 +76,17 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-    - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
-      uses: anchore/scan-action@b08527d5ae7f7dc76f9621edb6e49eaf47933ccd
-      with:
-        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-        acs-report-enable: true
-    - name: Upload Anchore Scan Report
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: results.sarif
+      #running security scan for container image:
+
+      - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
+        uses: anchore/scan-action@b08527d5ae7f7dc76f9621edb6e49eaf47933ccd
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          acs-report-enable: true
+      - name: Upload Anchore Scan Report
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: results.sarif
 
 
       # Sign the resulting Docker image digest except on PRs.
